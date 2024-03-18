@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:include="~{/stable/head.html}"></div>
+<body>
+<div th:include="~{/stable/navbar.html}"></div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col-sm-6 mb-3 mb-sm-0" style="display: grid; justify-content: space-between;width: 100%; grid-template-columns: repeat(2, 1fr);">
+            <div class="card mt-3" style="width: 90%;" th:if="${not appl.isHandled()}" th:each = "appl : ${applications}" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span style="color: red; font-weight: bold">*(New)</span> Application from <span style="font-weight: bold" th:text="${appl.getUserName()}"></span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Course: ' + ${appl.getCourseName()}"></h6>
+                    <p class="card-text"  th:text="${appl.getCommentary()}"></p>
+                    <div style="display: flex; align-items: center;">
+                        <a href="#" class="card-text" style="display: block; color: #000; font-weight: bold; text-decoration: none; margin-right: 25px"  th:text="'Phone: ' + ${appl.getPhone()}">Card link</a>
+                        <a href="#" class="card-link">More details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>

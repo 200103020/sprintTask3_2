@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:include="~{/stable/head.html}"></div>
+<body>
+<div th:include="~{/stable/navbar.html}"></div>
+<body>
+    <div class="container" >
+        <h3 th:if="${not appl.isHandled()}" style="color: red; text-align: center; margin: 15px 0;">
+            *** New unprocessed application ***
+        </h3>
+
+        <h3 th:if="${appl.isHandled()}" style="color: green; text-align: center; margin: 15px 0;">
+            Processed application
+        </h3>
+
+        <form class="mt-3" style="width: 45%; margin: 0 auto;" th:action="@{'/main/updateAppl'}" method="post" >
+            <input type="hidden" class="form-control" aria-describedby="emailHelp" name="id" th:value="${appl.getId()}">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" aria-describedby="emailHelp" name="username" th:value="${appl.getUserName()}" readonly style="background: beige;">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Course</label>
+                <input type="text" class="form-control" name="course" th:value="${appl.getCourseName()}" readonly style="background: beige;">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Mobile Phone</label>
+                <input type="tel" class="form-control"  name="phone" th:value="${appl.getPhone()}" readonly style="background: beige;">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Comment</label>
+                <input type="text" class="form-control" name="comment" th:value="${appl.getCommentary()}" readonly style="background: beige;">
+            </div>
+            <div>
+                <button type="submit" th:if="${not appl.isHandled()}" class="btn btn-success" style="margin: 0 auto 10px; display: block; width: 100%;">
+                    Processed Application
+                </button>
+            </div>
+        </form>
+
+        <form th:action="@{'/main/deleteAppl'}" method="post">
+            <input type="hidden"  name="id" th:value="${appl.getId()}">
+            <button type="submit" class="btn btn-danger" style="margin: 0 auto; display: block; width: 45%;">
+                Delete
+            </button>
+        </form>
+    </div>
+</body>
+</html>
